@@ -1,0 +1,64 @@
+<li class="list-group-item" id="post_no{{p.id}}">
+  <div class="media">
+    <div class="media-body">
+      <div class="manage-post">
+        <i class="fa fa-ellipsis-v" onclick="managePost('{{p.id}}')" aria-hidden="true"></i>
+        <div class="manage-items" id="man{{p.id}}">
+          <div class="manage-menu-btn">
+            <ul class="manage-list">
+              {% if request.user == p.user %}
+              <li class="item-li"><button onclick="edit('{{p.id}}')" class="manage-btn" id="edit_btn">Edit</button></li>
+              <li class="item-li"><button data-id="{{ p.id }}" class="manage-btn" id="del_btn">Delete</button></li>
+              {% endif %}
+              <li class="item-li"><button data-id="{{ p.id }}" class="manage-btn" id="hide_btn">Hide</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h4 class="media-heading"><a href="{% url 'profile' p.user.id %}">{{p.user}}</a></h4>
+      <span id="post{{p.id}}">{{p.text}}</span>
+      <form id="edited_form" onsubmit="editPost('{{p.id}}')">
+        {% if request.user == p.user %}
+        <textarea name="edit-post" class="post_edits" id="edit_post{{p.id}}" rows="3">{{p.text}}</textarea>
+        {% endif %}
+        <div class="thumbnail">{% if p.image.url != None %}
+          {{p.image.url}}
+          <img class="img-thumbnail" src="{{p.image.url}}" alt=",">
+          {% endif %}
+          <small id="time{{p.id}}" class="text-muted pull-right">{{p.timestamp}}</small>
+          <div class="col-sm-6 manage_items">
+            <button id="save-edit-post{{p.id}}" style="float: right;"
+              class="btn btn-info btn-sm pull-right waves-effect waves-light edit-save-btn">Save</button>
+          </div>
+      </form>
+      <div class="row manage_items" id="managerow{{p.id}}">
+        <div class="col">
+          <div class="post-likes">
+            {% if request.user in p.likes.all %}
+            <label for="liked">
+              <i class="far fa-heart liked_p" onclick="like('{{p.id}}')" data-id="{{p.id}}" id="like_btn{{p.id}}"><span
+                  style="opacity: 0; position: absolute;" id="like_txt{{p.id}}">Liked</span></i>
+            </label>
+            {% else %}
+            <label for="like">
+              <i class="far fa-heart" onclick="like('{{p.id}}')" data-id="{{p.id}}" id="like_btn{{p.id}}"><span
+                  style="opacity: 0; position: absolute;" id="like_txt{{p.id}}">Like</span></i>
+            </label>
+            {% endif %}
+
+            <span id="total-like{{p.id}}">{{p.likes.count}}</span>
+          </div>
+        </div>
+        <div class="col" style="text-align: center;">
+          <div class="comment">
+            <i class="fa fa-comment-alt"></i>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+</li>

@@ -1,0 +1,23 @@
+{% extends 'network/layout.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-xs-12 offset-md-3">
+            <hr class="margin-bottom-10">
+            <ul class="list-group list-group-dividered list-group-full">
+                {% for p in post %}
+                {% include 'network/post.html' %}
+                {% endfor%}
+            </ul>
+            {% if post.has_previous %}
+            <a href="?page={{ post.previous_page_number }}"> Previous </a>
+            {% endif %}
+            {% if post.has_next %}
+            <a href="?page={{ post.next_page_number }}"> Next </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+
+<div class="login-wrapper">
+    {% if message %}
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>{{ message }}</div>
+    {% endif %}
+    <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+        <form action="{% url 'register' %}" method="POST" class="login100-form validate-form">
+            {% csrf_token %}
+            <span class="login100-form-title p-b-49">
+                Register
+            </span>
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Username is reauired">
+                <span class="label-input100">Username</span>
+                <input class="input100" type="text" name="username" placeholder="Type your username">
+                <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Email is reauired">
+                <span class="label-input100">Email</span>
+                <input class="input100" type="text" name="email" placeholder="Type your Email Address">
+                <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 validate-input m-b-23" data-validate="Invalid Password">
+                <span class="label-input100">Password</span>
+                <input class="input100" type="password" name="password" placeholder="Type your Password">
+                <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 validate-input" data-validate="Password is required">
+                <span class="label-input100">Confirm Password</span>
+                <input class="input100" type="password" name="confirmation" placeholder="Type your password">
+                <span class="focus-input100"></span>
+            </div>
+
+            <div class="container-login100-form-btn">
+                <div class="wrap-login100-form-btn">
+                    <div class="login100-form-bgbtn"></div>
+                    <button class="login100-form-btn">
+                        Register
+                    </button>
+                </div>
+            </div>
+
+
+            <div class="flex-col-c p-t-155">
+                <span class="txt1 p-b-17">
+                    Or Sign In Using
+                </span>
+                <a href="{% url 'login' %}" class="txt2">
+                    Sign in
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock %}
